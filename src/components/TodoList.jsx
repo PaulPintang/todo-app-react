@@ -11,8 +11,8 @@ const TodoList = () => {
     <div>
       <div className="bg-gray-200 rounded-sm p-4">
         <div className="flex items-center justify-between">
-          <p className="font-medium">Sleep</p>
-          <div className="flex items-center">
+          <p className={checked ? "italic" : ""}>Sleep</p>
+          <div className="flex items-center ">
             <button className="bg-red-500 text-white px-3 rounded-md text-xs mr-1">
               delete
             </button>
@@ -20,7 +20,9 @@ const TodoList = () => {
               <button className="bg-green-600 text-white px-3 rounded-md text-xs">
                 edit
               </button>
-            ) : null}
+            ) : (
+              ""
+            )}
             <Checkbox
               size="small"
               checked={checked}
@@ -31,9 +33,24 @@ const TodoList = () => {
         </div>
         <div className="flex justify-between items-center">
           <small>
-            Status:{" "}
-            <span className="bg-yellow-500 text-white px-2 rounded-md">
-              Pending
+            Status:
+            {/* {checked ? (
+              <span className="bg-green-500 text-white px-2 rounded-md">
+                Done
+              </span>
+            ) : (
+              <span className="bg-yellow-500 text-white px-2 rounded-md">
+                Pending
+              </span>
+            )} */}
+            <span
+              className={
+                checked
+                  ? "bg-green-500 text-white px-2 rounded-md"
+                  : "bg-yellow-500 text-white px-2 rounded-md"
+              }
+            >
+              {checked ? "Done" : "Pending"}
             </span>
           </small>
           <div className="flex items-center gap-1">
