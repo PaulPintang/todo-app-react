@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import PostList from "./PostList";
+import PostList from "./PostList";
 const Post = () => {
-  const post = [
+  const posts = [
     {
       id: 1,
       title: "Today is a happy day",
@@ -14,9 +14,10 @@ const Post = () => {
   return (
     <div>
       Your Post
-      {post.map((post) => (
-        <p>{post.title}</p>
-      ))}
+      {/* {posts.map((post) => (
+        <p key={post.id}>{post.title}</p>
+      ))} */}
+      <PostList post={posts} />
     </div>
   );
 };

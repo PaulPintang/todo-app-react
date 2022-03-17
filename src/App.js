@@ -5,7 +5,7 @@ import Post from "./components/Post.jsx";
 
 function App() {
   return (
-    <div className="m-auto py-6" style={{ maxWidth: 800 }}>
+    <div className="m-auto p-7" style={{ maxWidth: 800 }}>
       <Header />
       <Post />
     </div>
