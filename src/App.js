@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="m-auto p-7" style={{ maxWidth: 800 }}>
       <Header />
-      <Post />
+      {/* <Post /> */}
     </div>
   );
 }
