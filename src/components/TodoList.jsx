@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 const TodoList = () => {
   const [checked, setChecked] = useState(false);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("pending");
   // to mark as done
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
   const handleStatus = () => {
-    // status === "in-progress" ? setStatus("in-progress") : setStatus("pending");
     setStatus(status === "in-progress" ? "pending" : "in-progress");
   };
   return (
@@ -38,38 +37,38 @@ const TodoList = () => {
         <div className="flex justify-between items-center">
           <small>
             Status:
-            {status === "in-progress" ? (
-              <button
-                className="bg-blue-500 text-white px-3 rounded-md text-xs"
-                onClick={handleStatus}
-              >
+            {checked ? (
+              <span className="bg-green-500 text-white px-2 rounded-md ml-1">
+                Done
+              </span>
+            ) : status === "in-progress" ? (
+              <span className="bg-blue-500 text-white px-2 rounded-md ml-1">
                 in-progress
-              </button>
+              </span>
             ) : (
-              <span
-                className={
-                  checked
-                    ? "bg-green-500 text-white px-2 rounded-md"
-                    : "bg-yellow-500 text-white px-2 rounded-md"
-                }
-              >
-                {checked ? "Done" : "Pending"}
+              <span className="bg-yellow-500 text-white px-2 rounded-md ml-1">
+                pending
               </span>
             )}
           </small>
           <div className="flex items-center gap-1">
-            <small>Change status to: </small>
-
-            <button
-              className={
-                status === "in-progress"
-                  ? "bg-yellow-500 text-white px-3 rounded-md text-xs"
-                  : "bg-blue-500 text-white px-3 rounded-md text-xs"
-              }
-              onClick={handleStatus}
-            >
-              {status === "in-progress" ? "pending" : "in-progress"}
-            </button>
+            {checked === false ? (
+              <div>
+                <small>Change status to: </small>
+                <button
+                  className={
+                    status === "in-progress"
+                      ? "bg-yellow-500 text-white px-3 rounded-md text-xs"
+                      : "bg-blue-500 text-white px-3 rounded-md text-xs"
+                  }
+                  onClick={handleStatus}
+                >
+                  {status === "in-progress" ? "pending" : "in-progress"}
+                </button>
+              </div>
+            ) : (
+              <p className="font-medium text-xs">Good job :)</p>
+            )}
           </div>
         </div>
       </div>
