@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 const TodoList = () => {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(true);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
+
   return (
     <div>
       <div className="bg-gray-200 rounded-sm p-4">
@@ -15,9 +16,11 @@ const TodoList = () => {
             <button className="bg-red-500 text-white px-3 rounded-md text-xs mr-1">
               delete
             </button>
-            <button className="bg-green-600 text-white px-3 rounded-md text-xs">
-              edit
-            </button>
+            {!checked ? (
+              <button className="bg-green-600 text-white px-3 rounded-md text-xs">
+                edit
+              </button>
+            ) : null}
             <Checkbox
               size="small"
               checked={checked}
