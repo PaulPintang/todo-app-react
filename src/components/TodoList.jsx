@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 const TodoList = () => {
-  const [checked, setChecked] = useState(true);
-
+  const [checked, setChecked] = useState(false);
+  const [status, setStatus] = useState("");
+  // to mark as done
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-
+  const handleStatus = () => {
+    // status === "in-progress" ? setStatus("in-progress") : setStatus("pending");
+    setStatus(status === "in-progress" ? "pending" : "in-progress");
+  };
   return (
     <div>
-      <div className="bg-gray-200 rounded-sm p-4">
+      <div className="bg-gray-200 rounded-md p-4">
         <div className="flex items-center justify-between">
           <p className={checked ? "italic" : ""}>Sleep</p>
           <div className="flex items-center ">
@@ -34,29 +38,37 @@ const TodoList = () => {
         <div className="flex justify-between items-center">
           <small>
             Status:
-            {/* {checked ? (
-              <span className="bg-green-500 text-white px-2 rounded-md">
-                Done
-              </span>
+            {status === "in-progress" ? (
+              <button
+                className="bg-blue-500 text-white px-3 rounded-md text-xs"
+                onClick={handleStatus}
+              >
+                in-progress
+              </button>
             ) : (
-              <span className="bg-yellow-500 text-white px-2 rounded-md">
-                Pending
+              <span
+                className={
+                  checked
+                    ? "bg-green-500 text-white px-2 rounded-md"
+                    : "bg-yellow-500 text-white px-2 rounded-md"
+                }
+              >
+                {checked ? "Done" : "Pending"}
               </span>
-            )} */}
-            <span
-              className={
-                checked
-                  ? "bg-green-500 text-white px-2 rounded-md"
-                  : "bg-yellow-500 text-white px-2 rounded-md"
-              }
-            >
-              {checked ? "Done" : "Pending"}
-            </span>
+            )}
           </small>
           <div className="flex items-center gap-1">
             <small>Change status to: </small>
-            <button className="bg-blue-500 text-white px-3 rounded-md text-xs">
-              in-progress
+
+            <button
+              className={
+                status === "in-progress"
+                  ? "bg-yellow-500 text-white px-3 rounded-md text-xs"
+                  : "bg-blue-500 text-white px-3 rounded-md text-xs"
+              }
+              onClick={handleStatus}
+            >
+              {status === "in-progress" ? "pending" : "in-progress"}
             </button>
           </div>
         </div>
