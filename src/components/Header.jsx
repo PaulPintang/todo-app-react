@@ -6,8 +6,13 @@ const Header = () => {
     <div>
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold">Your Post</h1>
-        <Button variant="contained" color="primary">
-          Hello World
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          style={{ textTransform: "none" }}
+        >
+          Add Post
         </Button>
       </div>
     </div>
