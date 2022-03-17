@@ -1,13 +1,14 @@
 import "./App.css";
 // components
-import Header from "./components/Header";
-import Post from "./components/Post.jsx";
+import Todo from "./components/Todo.jsx";
 
 function App() {
   return (
-    <div className="m-auto p-7" style={{ maxWidth: 800 }}>
-      <Header />
-      {/* <Post /> */}
+    <div className="m-auto p-7" style={{ maxWidth: 430 }}>
+      <h1 className="text-2xl font-semibold text-center pb-4">
+        Todo App / React
+      </h1>
+      <Todo />
     </div>
   );
 }
