@@ -24,6 +24,9 @@ const Todo = () => {
     // empty/null the input value after submit
     setTodoName("");
   };
+  const handleUpdate = () => {
+    alert("Update");
+  };
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
@@ -35,13 +38,13 @@ const Todo = () => {
           onChange={handleInput}
           value={todoName}
         />
-        {update ? (
+        {update && todoName.length ? (
           <Button
             variant="contained"
             color="primary"
             size="small"
             style={{ padding: 8 }}
-            onClick={handleSubmit}
+            onClick={handleUpdate}
           >
             Update
           </Button>
