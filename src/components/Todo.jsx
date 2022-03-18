@@ -3,20 +3,7 @@ import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
   // add 3 initial object values
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "Eat",
-    },
-    {
-      id: 2,
-      title: "Sleep",
-    },
-    {
-      id: 3,
-      title: "Code",
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [todoName, setTodoName] = useState("");
 
   const handleInput = (e) => {
@@ -25,13 +12,17 @@ const Todo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setTodos((todos) => [
-      // spread initial data,
+      // ...spread initial data,
       ...todos,
       {
-        id: 4,
+        id: Math.random() * 1000,
         title: todoName,
+        status: "pending",
+        done: false,
       },
     ]);
+    // empty/null the input value after submit
+    setTodoName("");
   };
   return (
     <div>
@@ -55,7 +46,6 @@ const Todo = () => {
         </Button>
       </div>
       <div>
-        <p class="py-3">You input: {todoName}</p>
         <p className="py-3"> Added todo's:</p>
         <TodoList todos={todos} />
       </div>
