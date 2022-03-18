@@ -13,7 +13,9 @@ const TodoList = (props) => {
   // };
   return (
     <div className="space-y-3">
-      <TodoItem todos={todos} />
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} />
+      ))}
     </div>
   );
 };
