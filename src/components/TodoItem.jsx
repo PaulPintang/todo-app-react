@@ -3,19 +3,36 @@ import { Checkbox } from "@material-ui/core";
 
 const TodoItem = ({ todo }) => {
   const [status, setStatus] = useState(todo.status);
+  const [completed, setCompleted] = useState(todo.completed);
+  console.log(status);
   const handleStatus = () => {
-    setStatus(status === "pending" && "in-progress" ? "done" : "pending");
+    setStatus(status === "pending" ? "in-progress" : "pending");
+  };
+  const handleComplete = () => {
+    setCompleted(!completed);
+  };
+  const handleEdit = () => {
+    alert("edit");
+  };
+  const handleDelete = () => {
+    alert("Delete");
   };
   return (
     <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
       <div className="flex items-center justify-between">
-        <p className={status === "done" ? "italic" : ""}>{todo.title}</p>
+        <p className={status === "completed" ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">
-          <button className="bg-red-500 text-white px-3 rounded-md text-xs mr-1">
+          <button
+            className="bg-red-500 text-white px-3 rounded-md text-xs mr-1"
+            onClick={handleDelete}
+          >
             delete
           </button>
-          {status !== "done" ? (
-            <button className="bg-green-600 text-white px-3 rounded-md text-xs">
+          {status !== "completed" ? (
+            <button
+              className="bg-green-600 text-white px-3 rounded-md text-xs"
+              onClick={handleEdit}
+            >
               edit
             </button>
           ) : (
@@ -23,10 +40,8 @@ const TodoItem = ({ todo }) => {
           )}
           <Checkbox
             size="small"
-            checked={
-              status === "pending" ? false : status === "done" ? true : ""
-            }
-            onChange={handleStatus}
+            checked={completed}
+            onChange={handleComplete}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </div>
@@ -34,22 +49,22 @@ const TodoItem = ({ todo }) => {
       <div className="flex justify-between items-center">
         <small>
           Status:
-          {status === "done" ? (
+          {completed ? (
             <span className="bg-green-500 text-white px-2 rounded-md ml-1">
               Done
             </span>
-          ) : status === "in-progress" ? (
-            <span className="bg-blue-500 text-white px-2 rounded-md ml-1">
-              in-progress
-            </span>
-          ) : (
+          ) : status === "pending" ? (
             <span className="bg-yellow-500 text-white px-2 rounded-md ml-1">
               pending
+            </span>
+          ) : (
+            <span className="bg-blue-500 text-white px-2 rounded-md ml-1">
+              in-progress
             </span>
           )}
         </small>
         <div className="flex items-center gap-1">
-          {status === "pending" ? (
+          {!completed ? (
             <div>
               <small>Change status to: </small>
               <button
