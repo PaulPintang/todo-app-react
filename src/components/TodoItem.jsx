@@ -3,18 +3,22 @@ import { Checkbox } from "@material-ui/core";
 
 const TodoItem = ({ todo }) => {
   const [done, setDone] = useState(todo.done);
+  const [status, setStatus] = useState(todo.status);
   const handleChange = () => {
     setDone(!done);
+  };
+  const handleStatus = () => {
+    setStatus(status === "in-progress" ? "pending" : "in-progress");
   };
   return (
     <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
       <div className="flex items-center justify-between">
-        <p className={todo.done ? "italic" : ""}>{todo.title}</p>
+        <p className={done ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">
           <button className="bg-red-500 text-white px-3 rounded-md text-xs mr-1">
             delete
           </button>
-          {!todo.done ? (
+          {!done ? (
             <button className="bg-green-600 text-white px-3 rounded-md text-xs">
               edit
             </button>
@@ -36,7 +40,7 @@ const TodoItem = ({ todo }) => {
             <span className="bg-green-500 text-white px-2 rounded-md ml-1">
               Done
             </span>
-          ) : todo.status === "in-progress" ? (
+          ) : status === "in-progress" ? (
             <span className="bg-blue-500 text-white px-2 rounded-md ml-1">
               in-progress
             </span>
@@ -47,18 +51,18 @@ const TodoItem = ({ todo }) => {
           )}
         </small>
         <div className="flex items-center gap-1">
-          {done === false ? (
+          {!done ? (
             <div>
               <small>Change status to: </small>
               <button
                 className={
-                  todo.status === "in-progress"
+                  status === "in-progress"
                     ? "bg-yellow-500 text-white px-3 rounded-md text-xs"
                     : "bg-blue-500 text-white px-3 rounded-md text-xs"
                 }
-                // onClick={handleStatus}
+                onClick={handleStatus}
               >
-                {todo.status === "in-progress" ? "pending" : "in-progress"}
+                {status === "in-progress" ? "pending" : "in-progress"}
               </button>
             </div>
           ) : (
