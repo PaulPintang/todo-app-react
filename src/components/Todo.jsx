@@ -19,16 +19,17 @@ const Todo = () => {
   ]);
   const [todoName, setTodoName] = useState("");
 
-  const handleInput = () => {
-    console.log("changes in input");
+  const handleInput = (e) => {
+    setTodoName(e.target.value);
   };
-  const handleAddTodo = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setTodos((todos) => [
       // spread initial data,
       ...todos,
       {
         id: 4,
-        title: "Repear",
+        title: todoName,
       },
     ]);
   };
@@ -41,18 +42,20 @@ const Todo = () => {
           variant="outlined"
           size="small"
           onChange={handleInput}
+          value={todoName}
         />
         <Button
           variant="contained"
           color="secondary"
           size="small"
           style={{ padding: 8 }}
-          onClick={handleAddTodo}
+          onClick={handleSubmit}
         >
           Add todo
         </Button>
       </div>
       <div>
+        <p class="py-3">You input: {todoName}</p>
         <p className="py-3"> Added todo's:</p>
         <TodoList todos={todos} />
       </div>
