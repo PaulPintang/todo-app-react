@@ -2,23 +2,19 @@ import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 
 const TodoItem = ({ todo }) => {
-  const [done, setDone] = useState(todo.done);
   const [status, setStatus] = useState(todo.status);
-  const handleChange = () => {
-    setDone(!done);
-  };
   const handleStatus = () => {
-    setStatus(status === "in-progress" ? "pending" : "in-progress");
+    setStatus(status === "pending" && "in-progress" ? "done" : "pending");
   };
   return (
     <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
       <div className="flex items-center justify-between">
-        <p className={done ? "italic" : ""}>{todo.title}</p>
+        <p className={status === "done" ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">
           <button className="bg-red-500 text-white px-3 rounded-md text-xs mr-1">
             delete
           </button>
-          {!done ? (
+          {status !== "done" ? (
             <button className="bg-green-600 text-white px-3 rounded-md text-xs">
               edit
             </button>
@@ -27,8 +23,10 @@ const TodoItem = ({ todo }) => {
           )}
           <Checkbox
             size="small"
-            checked={done}
-            onChange={handleChange}
+            checked={
+              status === "pending" ? false : status === "done" ? true : ""
+            }
+            onChange={handleStatus}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </div>
@@ -36,7 +34,7 @@ const TodoItem = ({ todo }) => {
       <div className="flex justify-between items-center">
         <small>
           Status:
-          {done ? (
+          {status === "done" ? (
             <span className="bg-green-500 text-white px-2 rounded-md ml-1">
               Done
             </span>
@@ -51,7 +49,7 @@ const TodoItem = ({ todo }) => {
           )}
         </small>
         <div className="flex items-center gap-1">
-          {!done ? (
+          {status === "pending" ? (
             <div>
               <small>Change status to: </small>
               <button

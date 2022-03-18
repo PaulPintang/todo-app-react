@@ -18,7 +18,6 @@ const Todo = () => {
         id: Math.random() * 1000,
         title: todoName,
         status: "pending",
-        done: false,
       },
     ]);
     // empty/null the input value after submit
