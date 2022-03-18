@@ -14,7 +14,7 @@ const TodoList = (props) => {
   return (
     <div className="space-y-3">
       {todos.map((todo) => (
-        <div className="bg-gray-200 rounded-md p-4">
+        <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
           <div className="flex items-center justify-between">
             <p className={checked ? "italic" : ""}>{todo.title}</p>
             <div className="flex items-center ">

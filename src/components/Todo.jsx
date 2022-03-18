@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
+  // add 3 initial object values
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -16,9 +17,14 @@ const Todo = () => {
       title: "Code",
     },
   ]);
+  const [todoName, setTodoName] = useState("");
 
-  const addTodo = () => {
+  const handleInput = () => {
+    console.log("changes in input");
+  };
+  const handleAddTodo = () => {
     setTodos((todos) => [
+      // spread initial data,
       ...todos,
       {
         id: 4,
@@ -34,13 +40,14 @@ const Todo = () => {
           label="your new todo"
           variant="outlined"
           size="small"
+          onChange={handleInput}
         />
         <Button
           variant="contained"
           color="secondary"
           size="small"
           style={{ padding: 8 }}
-          onClick={addTodo}
+          onClick={handleAddTodo}
         >
           Add todo
         </Button>
