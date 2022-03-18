@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, todoName, setTodoName }) => {
   const [status, setStatus] = useState(todo.status);
   const [completed, setCompleted] = useState(todo.completed);
-  console.log(status);
   const handleStatus = () => {
     setStatus(status === "pending" ? "in-progress" : "pending");
   };
@@ -12,7 +11,7 @@ const TodoItem = ({ todo }) => {
     setCompleted(!completed);
   };
   const handleEdit = () => {
-    alert("edit");
+    setTodoName(todo.title);
   };
   const handleDelete = () => {
     alert("Delete");
@@ -28,7 +27,7 @@ const TodoItem = ({ todo }) => {
           >
             delete
           </button>
-          {status !== "completed" ? (
+          {!completed ? (
             <button
               className="bg-green-600 text-white px-3 rounded-md text-xs"
               onClick={handleEdit}

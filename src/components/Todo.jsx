@@ -47,7 +47,7 @@ const Todo = () => {
       </div>
       <div>
         <p className="py-3"> Added todo's:</p>
-        <TodoList todos={todos} />
+        <TodoList todos={todos} todoName={todoName} setTodoName={setTodoName} />
       </div>
     </div>
   );
