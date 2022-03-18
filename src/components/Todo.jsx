@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
-  // add 3 initial object values
+  const [update, setUpdate] = useState(false);
   const [todos, setTodos] = useState([]);
   const [todoName, setTodoName] = useState("");
 
@@ -35,19 +35,35 @@ const Todo = () => {
           onChange={handleInput}
           value={todoName}
         />
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          style={{ padding: 8 }}
-          onClick={handleSubmit}
-        >
-          Add todo
-        </Button>
+        {update ? (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            style={{ padding: 8 }}
+            onClick={handleSubmit}
+          >
+            Update
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            style={{ padding: 8 }}
+            onClick={handleSubmit}
+          >
+            Add todo
+          </Button>
+        )}
       </div>
       <div>
         <p className="py-3"> Added todo's:</p>
-        <TodoList todos={todos} todoName={todoName} setTodoName={setTodoName} />
+        <TodoList
+          todos={todos}
+          setUpdate={setUpdate}
+          setTodoName={setTodoName}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 
-const TodoItem = ({ todo, todoName, setTodoName }) => {
+const TodoItem = ({ todo, setUpdate, setTodoName }) => {
   const [status, setStatus] = useState(todo.status);
   const [completed, setCompleted] = useState(todo.completed);
   const handleStatus = () => {
@@ -12,6 +12,7 @@ const TodoItem = ({ todo, todoName, setTodoName }) => {
   };
   const handleEdit = () => {
     setTodoName(todo.title);
+    setUpdate(true);
   };
   const handleDelete = () => {
     alert("Delete");
