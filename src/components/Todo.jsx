@@ -17,6 +17,15 @@ const Todo = () => {
     },
   ]);
 
+  const addTodo = () => {
+    setTodos((todos) => [
+      ...todos,
+      {
+        id: 4,
+        title: "Repear",
+      },
+    ]);
+  };
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
@@ -31,6 +40,7 @@ const Todo = () => {
           color="secondary"
           size="small"
           style={{ padding: 8 }}
+          onClick={addTodo}
         >
           Add todo
         </Button>
