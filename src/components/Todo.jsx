@@ -2,6 +2,21 @@ import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      title: "Eat",
+    },
+    {
+      id: 2,
+      title: "Sleep",
+    },
+    {
+      id: 3,
+      title: "Code",
+    },
+  ]);
+
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
@@ -22,7 +37,7 @@ const Todo = () => {
       </div>
       <div>
         <p className="py-3"> Added todo's:</p>
-        <TodoList />
+        <TodoList todos={todos} />
       </div>
     </div>
   );
