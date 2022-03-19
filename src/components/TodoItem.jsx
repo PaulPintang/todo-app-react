@@ -49,19 +49,21 @@ const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
       <div className="flex justify-between items-center">
         <small>
           Status:
-          {completed ? (
-            <span className="bg-green-500 text-white px-2 rounded-md ml-1">
-              Done
-            </span>
-          ) : status === "pending" ? (
-            <span className="bg-yellow-500 text-white px-2 rounded-md ml-1">
-              pending
-            </span>
-          ) : (
-            <span className="bg-blue-500 text-white px-2 rounded-md ml-1">
-              in-progress
-            </span>
-          )}
+          <span
+            className={`text-white px-2 rounded-md ml-1 ${
+              completed
+                ? "bg-green-500"
+                : status === "in-progress"
+                ? "bg-blue-500"
+                : "bg-yellow-500"
+            }`}
+          >
+            {completed
+              ? "Done"
+              : status === "pending"
+              ? "pending"
+              : "in-progress"}
+          </span>
         </small>
         <div className="flex items-center gap-1">
           {!completed ? (
