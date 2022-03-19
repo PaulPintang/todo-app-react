@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TodoItem from "./TodoItem";
 const TodoList = (props) => {
   const { todos, setUpdate, setTodoName, setTodos } = props;
+
   return (
     <div className="space-y-3">
       {todos.map((todo) => (

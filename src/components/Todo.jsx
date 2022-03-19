@@ -8,13 +8,13 @@ const Todo = () => {
 
   // this will run once
   useEffect(() => {
-    getLocalTodos();
+    if (localStorage.getItem("todos" === null)) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
+    }
   }, []);
-
-  // this will run when items in todos change
-  useEffect(() => {
-    saveLocalTodos();
-  }, [todos]);
 
   const handleInput = (e) => {
     setTodoName(e.target.value);
@@ -31,25 +31,13 @@ const Todo = () => {
         completed: false,
       },
     ]);
-    // empty/null the input value after submit
+    // empty/null the input value after submitmen
     setTodoName("");
   };
   const handleUpdate = () => {
     alert("Update");
   };
 
-  // Save to local storage
-  const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  };
-  const getLocalTodos = () => {
-    if (localStorage.getItem("todos" === null)) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
-    }
-  };
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
