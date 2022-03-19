@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
   const [update, setUpdate] = useState(false);
   const [todos, setTodos] = useState([]);
   const [todoName, setTodoName] = useState("");
+
+  // this will run once
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
+
+  // this will run when items in todos change
+  useEffect(() => {
+    saveLocalTodos();
+  }, [todos]);
 
   const handleInput = (e) => {
     setTodoName(e.target.value);
@@ -26,6 +36,19 @@ const Todo = () => {
   };
   const handleUpdate = () => {
     alert("Update");
+  };
+
+  // Save to local storage
+  const saveLocalTodos = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+  const getLocalTodos = () => {
+    if (localStorage.getItem("todos" === null)) {
+      localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+      let todoLocal = JSON.parse(localStorage.getItem("todos"));
+      setTodos(todoLocal);
+    }
   };
   return (
     <div>
