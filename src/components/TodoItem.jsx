@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox } from "@material-ui/core";
 
-const TodoItem = ({ todo, setUpdate, setTodoName }) => {
+const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
   const [status, setStatus] = useState(todo.status);
   const [completed, setCompleted] = useState(todo.completed);
   const handleStatus = () => {
@@ -15,12 +15,12 @@ const TodoItem = ({ todo, setUpdate, setTodoName }) => {
     setUpdate(true);
   };
   const handleDelete = () => {
-    alert("Delete");
+    setTodos(todos.filter((el) => el.id !== todo.id));
   };
   return (
     <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
       <div className="flex items-center justify-between">
-        <p className={status === "completed" ? "italic" : ""}>{todo.title}</p>
+        <p className={completed ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">
           <button
             className="bg-red-500 text-white px-3 rounded-md text-xs mr-1"

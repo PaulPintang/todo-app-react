@@ -38,7 +38,7 @@ const Todo = () => {
           onChange={handleInput}
           value={todoName}
         />
-        {update && todoName.length ? (
+        {update ? (
           <Button
             variant="contained"
             color="primary"
@@ -66,6 +66,7 @@ const Todo = () => {
           todos={todos}
           setUpdate={setUpdate}
           setTodoName={setTodoName}
+          setTodos={setTodos}
         />
       </div>
     </div>

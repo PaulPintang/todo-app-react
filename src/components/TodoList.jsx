@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 const TodoList = (props) => {
-  const { todos, setUpdate, setTodoName } = props;
+  const { todos, setUpdate, setTodoName, setTodos } = props;
   return (
     <div className="space-y-3">
       {todos.map((todo) => (
@@ -10,6 +10,8 @@ const TodoList = (props) => {
           todo={todo}
           setUpdate={setUpdate}
           setTodoName={setTodoName}
+          setTodos={setTodos}
+          todos={todos}
         />
       ))}
     </div>
