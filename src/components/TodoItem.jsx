@@ -68,14 +68,12 @@ const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
             <div>
               <small>Change status to: </small>
               <button
-                className={
-                  status === "in-progress"
-                    ? "bg-yellow-500 text-white px-3 rounded-md text-xs"
-                    : "bg-blue-500 text-white px-3 rounded-md text-xs"
-                }
+                className={`text-white px-3 rounded-md text-xs ${
+                  status === "pending" ? "bg-blue-500" : "bg-yellow-500"
+                }`}
                 onClick={handleStatus}
               >
-                {status === "in-progress" ? "pending" : "in-progress"}
+                {status === "pending" ? "in-progress" : "pending"}
               </button>
             </div>
           ) : (
