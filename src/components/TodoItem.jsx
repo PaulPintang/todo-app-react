@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Checkbox, Button } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Checkbox } from "@material-ui/core";
 
 const TodoItem = ({
   todo,
@@ -9,9 +9,6 @@ const TodoItem = ({
   setTodos,
   todos,
 }) => {
-  // const [status, setStatus] = useState(todo.status);
-  // const [completed, setCompleted] = useState(todo.completed);
-
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
