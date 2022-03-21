@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox } from "@material-ui/core";
+import { Checkbox, Button } from "@material-ui/core";
 
-const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
+const TodoItem = ({
+  todo,
+  setUpdate,
+  setUpdateId,
+  setTodoName,
+  setTodos,
+  todos,
+}) => {
   // const [status, setStatus] = useState(todo.status);
   // const [completed, setCompleted] = useState(todo.completed);
 
@@ -12,6 +19,7 @@ const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
   const handleEdit = () => {
     setTodoName(todo.title);
     setUpdate(true);
+    setUpdateId(todo.id);
   };
 
   // delete todo
@@ -50,7 +58,7 @@ const TodoItem = ({ todo, setUpdate, setTodoName, setTodos, todos }) => {
   };
 
   return (
-    <div className="bg-gray-200 rounded-md p-4" key={todo.id}>
+    <div className="bg-gray-200 rounded-md p-4 " key={todo.id}>
       <div className="flex items-center justify-between">
         <p className={todo.completed ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">

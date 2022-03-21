@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, setRef, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
 const Todo = () => {
   const [update, setUpdate] = useState(false);
+  const [updateId, setUpdateId] = useState();
   const [todos, setTodos] = useState([]);
   const [todoName, setTodoName] = useState("");
 
@@ -35,9 +36,20 @@ const Todo = () => {
     setTodoName("");
   };
   const handleUpdate = () => {
-    alert("Update");
+    setTodos(
+      todos.map((item) => {
+        if (item.id === updateId) {
+          return {
+            ...item,
+            title: todoName,
+          };
+        }
+        return item;
+      })
+    );
+    setUpdate(false);
+    setTodoName("");
   };
-
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
@@ -52,9 +64,8 @@ const Todo = () => {
         {update ? (
           <Button
             variant="contained"
-            color="primary"
             size="small"
-            style={{ padding: 8 }}
+            style={{ padding: 8, background: "#16A34A", color: "white" }}
             onClick={handleUpdate}
           >
             Update
@@ -78,6 +89,7 @@ const Todo = () => {
           setUpdate={setUpdate}
           setTodoName={setTodoName}
           setTodos={setTodos}
+          setUpdateId={setUpdateId}
         />
       </div>
     </div>

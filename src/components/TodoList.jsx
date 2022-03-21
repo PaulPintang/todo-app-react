@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TodoItem from "./TodoItem";
 const TodoList = (props) => {
-  const { todos, setUpdate, setTodoName, setTodos } = props;
+  const { todos, setUpdate, setUpdateId, setTodoName, setTodos } = props;
 
   return (
     <div className="space-y-3">
@@ -13,6 +13,7 @@ const TodoList = (props) => {
           setTodoName={setTodoName}
           setTodos={setTodos}
           todos={todos}
+          setUpdateId={setUpdateId}
         />
       ))}
     </div>
