@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
+import Axios from "axios";
 const Todo = () => {
   const [update, setUpdate] = useState(false);
   const [updateId, setUpdateId] = useState();
@@ -8,13 +9,19 @@ const Todo = () => {
   const [todoName, setTodoName] = useState("");
 
   // this will run once
+  // useEffect(() => {
+  //   if (localStorage.getItem("todos" === null)) {
+  //     localStorage.setItem("todos", JSON.stringify([]));
+  //   } else {
+  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //     setTodos(todoLocal);
+  //   }
+  // }, []);
   useEffect(() => {
-    if (localStorage.getItem("todos" === null)) {
-      localStorage.setItem("todos", JSON.stringify([]));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
-    }
+    Axios.get("http://localhost:5000/api/todos").then((response) => {
+      setTodos(response.data);
+      console.log(todos);
+    });
   }, []);
 
   const handleInput = (e) => {
