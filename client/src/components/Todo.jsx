@@ -9,14 +9,7 @@ const Todo = () => {
   const [todoName, setTodoName] = useState("");
 
   // this will run once
-  // useEffect(() => {
-  //   if (localStorage.getItem("todos" === null)) {
-  //     localStorage.setItem("todos", JSON.stringify([]));
-  //   } else {
-  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
-  //     setTodos(todoLocal);
-  //   }
-  // }, []);
+
   useEffect(() => {
     Axios.get("http://localhost:5000/api/todos").then((response) => {
       setTodos(response.data);

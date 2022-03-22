@@ -2,13 +2,16 @@ const mongoose = require("mongoose");
 
 const todoSchema = mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.ObjectId,
-      required: true,
-      ref: "User",
-    },
-    text: {
+    title: {
       type: String,
+      // required: [true, "Please add a text field"],
+    },
+    status: {
+      type: String,
+      required: [true, "Please add a text field"],
+    },
+    completed: {
+      type: Boolean,
       required: [true, "Please add a text field"],
     },
   },

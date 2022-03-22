@@ -9,9 +9,9 @@ const TodoItem = ({
   setTodos,
   todos,
 }) => {
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  // useEffect(() => {
+  //   localStorage.setItem("todos", JSON.stringify(todos));
+  // }, [todos]);
 
   const handleEdit = () => {
     setTodoName(todo.title);

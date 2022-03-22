@@ -12,12 +12,14 @@ const getTodos = asyncHandler(async (req, res) => {
 // post request / add todo
 // @route /api/todos
 const addTodo = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
-    res.status(400);
-    throw new Error("Please add a text field");
-  }
+  // if (!req.body.text) {
+  //   res.status(400);
+  //   throw new Error("Please add a text field");
+  // }
   const todo = await Todo.create({
-    text: req.body.text,
+    title: req.body.title,
+    status: req.body.status,
+    completed: req.body.completed,
   });
   res.status(200).json(todo);
 });
