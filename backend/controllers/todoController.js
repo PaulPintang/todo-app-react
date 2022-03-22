@@ -1,38 +1,60 @@
+const asyncHandler = require("express-async-handler");
+const { globalAgent } = require("http");
+
+const Todo = require("../models/todoModel");
+
 // get request / get todo
 // @route /api/todos
-const getTodos = async (req, res) => {
-  res.status(200).json({
-    title: "Get todo",
-  });
-};
+const getTodos = asyncHandler(async (req, res) => {
+  const todos = await Todo.find();
+  res.status(200).json(todos);
+});
 
 // post request / add todo
 // @route /api/todos
-const addTodo = async (req, res) => {
+const addTodo = asyncHandler(async (req, res) => {
   if (!req.body.text) {
     res.status(400);
     throw new Error("Please add a text field");
   }
-  res.status(200).json({
-    title: "Add todo",
+  const todo = await Todo.create({
+    text: req.body.text,
   });
-};
+  res.status(200).json(todo);
+});
 
 // put request / edit todo
 // @route /api/todos/:id
-const updateTodo = async (req, res) => {
-  res.status(200).json({
-    title: `Update todo ${req.params.id}`,
+const updateTodo = asyncHandler(async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+
+  if (!todo) {
+    res.status(400);
+    throw new Error("Todo not found");
+  }
+
+  const updatedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
   });
-};
+  res.status(200).json(updatedTodo);
+});
 
 // delete request / delete todo
 // @route /api/todos/:id
-const deleteTodo = async (req, res) => {
-  res.status(200).json({
-    title: `Delete todo ${req.params.id}`,
+const deleteTodo = asyncHandler(async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+
+  if (!todo) {
+    res.status(400);
+    throw new Error("Todo not found");
+  }
+
+  const deletedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
   });
-};
+
+  res.status(200).json(deletedTodo);
+});
 
 module.exports = {
   getTodos,
