@@ -1,6 +1,6 @@
 // get request / get todo
 // @route /api/todos
-const getTodos = (req, res) => {
+const getTodos = async (req, res) => {
   res.status(200).json({
     title: "Get todo",
   });
@@ -8,7 +8,11 @@ const getTodos = (req, res) => {
 
 // post request / add todo
 // @route /api/todos
-const addTodo = (req, res) => {
+const addTodo = async (req, res) => {
+  if (!req.body.text) {
+    res.status(400);
+    throw new Error("Please add a text field");
+  }
   res.status(200).json({
     title: "Add todo",
   });
@@ -16,7 +20,7 @@ const addTodo = (req, res) => {
 
 // put request / edit todo
 // @route /api/todos/:id
-const updateTodo = (req, res) => {
+const updateTodo = async (req, res) => {
   res.status(200).json({
     title: `Update todo ${req.params.id}`,
   });
@@ -24,14 +28,14 @@ const updateTodo = (req, res) => {
 
 // delete request / delete todo
 // @route /api/todos/:id
-const deleteTodo = (req, res) => {
+const deleteTodo = async (req, res) => {
   res.status(200).json({
     title: `Delete todo ${req.params.id}`,
   });
 };
 
 module.exports = {
-  getTodo,
+  getTodos,
   addTodo,
   updateTodo,
   deleteTodo,
