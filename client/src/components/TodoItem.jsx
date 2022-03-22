@@ -25,17 +25,23 @@ const TodoItem = ({
 
   // mark as done, for checkbox
   const handleComplete = () => {
-    setTodos(
-      todos.map((item) => {
-        if (item._id === todo._id) {
-          return {
-            ...item,
-            completed: !item.completed,
-          };
-        }
-        return item;
+    axios
+      .put(`http://localhost:5000/api/todos/${todo._id}`, {
+        completed: !todo.completed,
       })
-    );
+      .then(() => {
+        setTodos(
+          todos.map((item) => {
+            if (item._id === todo._id) {
+              return {
+                ...item,
+                completed: !item.completed,
+              };
+            }
+            return item;
+          })
+        );
+      });
   };
 
   // toggle status
