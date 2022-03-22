@@ -38,25 +38,32 @@ const Todo = () => {
           },
         ]);
       });
-    // empty/null the input value after submitmen
+    // empty/null the input value after submit
     setTodoName("");
   };
 
   const handleUpdate = () => {
-    setTodos(
-      todos.map((item) => {
-        if (item.id === updateId) {
-          return {
-            ...item,
-            title: todoName,
-          };
-        }
-        return item;
+    axios
+      .put(`http://localhost:5000/api/todos/${updateId}`, {
+        title: todoName,
       })
-    );
+      .then((res) => {
+        setTodos(
+          todos.map((item) => {
+            if (item.id === updateId) {
+              return {
+                ...item,
+                title: todoName,
+              };
+            }
+            return item;
+          })
+        );
+      });
     setUpdate(false);
     setTodoName("");
   };
+
   return (
     <div>
       <div className="flex items-center gap-2 justify-center">
