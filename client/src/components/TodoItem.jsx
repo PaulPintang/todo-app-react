@@ -46,17 +46,23 @@ const TodoItem = ({
 
   // toggle status
   const handleStatus = () => {
-    setTodos(
-      todos.map((item) => {
-        if (item._id === todo._id) {
-          return {
-            ...item,
-            status: todo.status === "pending" ? "in-progress" : "pending",
-          };
-        }
-        return item;
+    axios
+      .put(`http://localhost:5000/api/todos/${todo._id}`, {
+        status: todo.status === "pending" ? "in-progress" : "pending",
       })
-    );
+      .then(() => {
+        setTodos(
+          todos.map((item) => {
+            if (item._id === todo._id) {
+              return {
+                ...item,
+                status: todo.status === "pending" ? "in-progress" : "pending",
+              };
+            }
+            return item;
+          })
+        );
+      });
   };
 
   return (
