@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, TextField } from "@material-ui/core";
 import TodoList from "./TodoList";
-import Axios from "axios";
+import axios from "axios";
 const Todo = () => {
   const [update, setUpdate] = useState(false);
   const [updateId, setUpdateId] = useState();
@@ -10,7 +10,7 @@ const Todo = () => {
 
   // this will run once, get data from the database
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/todos").then((res) => {
+    axios.get("http://localhost:5000/api/todos").then((res) => {
       setTodos(res.data);
     });
   }, []);
@@ -19,20 +19,29 @@ const Todo = () => {
     setTodoName(e.target.value);
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setTodos((todos) => [
-      // ...spread initial data,
-      ...todos,
-      {
-        id: Math.random() * 1000,
+    axios
+      .post("http://localhost:5000/api/todos", {
+        // addd to database
         title: todoName,
         status: "pending",
         completed: false,
-      },
-    ]);
+      })
+      .then(() => {
+        setTodos([
+          // ...spread initial data, show data without refresh
+          ...todos,
+          // add to state
+          {
+            title: todoName,
+            status: "pending",
+            completed: false,
+          },
+        ]);
+      });
     // empty/null the input value after submitmen
     setTodoName("");
   };
+
   const handleUpdate = () => {
     setTodos(
       todos.map((item) => {

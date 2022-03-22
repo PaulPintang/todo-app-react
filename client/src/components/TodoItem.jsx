@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Checkbox } from "@material-ui/core";
+import axios from "axios";
 
 const TodoItem = ({
   todo,
@@ -9,26 +10,24 @@ const TodoItem = ({
   setTodos,
   todos,
 }) => {
-  // useEffect(() => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // }, [todos]);
-
   const handleEdit = () => {
     setTodoName(todo.title);
     setUpdate(true);
-    setUpdateId(todo.id);
+    setUpdateId(todo._id);
   };
 
   // delete todo
   const handleDelete = () => {
-    setTodos(todos.filter((el) => el.id !== todo.id));
+    axios.delete(`http://localhost:5000/api/todos/${todo._id}`).then(() => {
+      setTodos(todos.filter((el) => el._id !== todo._id));
+    });
   };
 
   // mark as done, for checkbox
   const handleComplete = () => {
     setTodos(
       todos.map((item) => {
-        if (item.id === todo.id) {
+        if (item._id === todo._id) {
           return {
             ...item,
             completed: !item.completed,
@@ -43,7 +42,7 @@ const TodoItem = ({
   const handleStatus = () => {
     setTodos(
       todos.map((item) => {
-        if (item.id === todo.id) {
+        if (item._id === todo._id) {
           return {
             ...item,
             status: todo.status === "pending" ? "in-progress" : "pending",
@@ -55,7 +54,7 @@ const TodoItem = ({
   };
 
   return (
-    <div className="bg-gray-200 rounded-md p-4 " key={todo.id}>
+    <div className="bg-gray-200 rounded-md p-4 " key={todo._id}>
       <div className="flex items-center justify-between">
         <p className={todo.completed ? "italic" : ""}>{todo.title}</p>
         <div className="flex items-center ">
