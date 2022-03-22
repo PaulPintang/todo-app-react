@@ -7,7 +7,7 @@ const TodoList = (props) => {
     <div className="space-y-3">
       {todos.map((todo) => (
         <TodoItem
-          key={todo.id}
+          key={todo._id}
           todo={todo}
           setUpdate={setUpdate}
           setTodoName={setTodoName}

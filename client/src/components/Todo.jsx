@@ -8,12 +8,10 @@ const Todo = () => {
   const [todos, setTodos] = useState([]);
   const [todoName, setTodoName] = useState("");
 
-  // this will run once
-
+  // this will run once, get data from the database
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/todos").then((response) => {
-      setTodos(response.data);
-      console.log(todos);
+    Axios.get("http://localhost:5000/api/todos").then((res) => {
+      setTodos(res.data);
     });
   }, []);
 
