@@ -1,6 +1,6 @@
 // get request / get todo
 // @route /api/todos
-const getTodo = (req, res) => {
+const getTodos = (req, res) => {
   res.status(200).json({
     title: "Get todo",
   });
