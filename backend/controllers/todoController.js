@@ -1,5 +1,4 @@
 const asyncHandler = require("express-async-handler");
-const { globalAgent } = require("http");
 
 const Todo = require("../models/todoModel");
 
@@ -44,16 +43,15 @@ const updateTodo = asyncHandler(async (req, res) => {
 const deleteTodo = asyncHandler(async (req, res) => {
   const todo = await Todo.findById(req.params.id);
 
+  console.log(todo);
   if (!todo) {
     res.status(400);
     throw new Error("Todo not found");
   }
 
-  const deletedTodo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  await todo.remove();
 
-  res.status(200).json(deletedTodo);
+  res.status(200).json({ id: req.params.id });
 });
 
 module.exports = {
