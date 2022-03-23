@@ -11,9 +11,10 @@ const Todo = () => {
   // this will run once, get data from the database
   useEffect(() => {
     axios.get("http://localhost:5000/api/todos").then((res) => {
+      console.log("rendered request");
       setTodos(res.data);
     });
-  }, []);
+  }, [update]);
 
   const handleInput = (e) => {
     setTodoName(e.target.value);
@@ -47,7 +48,7 @@ const Todo = () => {
       .put(`http://localhost:5000/api/todos/${updateId}`, {
         title: todoName,
       })
-      .then((res) => {
+      .then(() => {
         setTodos(
           todos.map((item) => {
             if (item.id === updateId) {
@@ -59,9 +60,9 @@ const Todo = () => {
             return item;
           })
         );
+        setUpdate(!update);
+        setTodoName("");
       });
-    setUpdate(false);
-    setTodoName("");
   };
 
   return (
@@ -100,6 +101,7 @@ const Todo = () => {
         <p className="py-3"> Added todo's:</p>
         <TodoList
           todos={todos}
+          todoName={todoName}
           setUpdate={setUpdate}
           setTodoName={setTodoName}
           setTodos={setTodos}
